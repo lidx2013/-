@@ -1,10 +1,70 @@
+
+
+## redis底层数据结构
+
+### 字符串
+
+#### sds 数据类型
+
+```
+type{
+	free //剩余空间
+    len:12	 //长度 大于1024*1024
+	char buff[]=
+}
+```
+
+##### 特点
+
+- 二进制数据安全
+
+### Hasp(K-V)
+
+#### dic 数据类型
+
+- 数组
+- 链表
+
+```
+dictEntry
+
+ 
+typedef struct redisObject {
+
+	 unsigned type:4 //类型
+	 unsigned encoding: //编码
+	 unsigned lru   //过期策略
+	 int refcount
+	 void *ptr;   //具体指向的指针
+}
+```
+
+
+
+### List
+
+#### 双端链表+ziplist
+
+```
+ziplist 255作为最后的长度
+```
+
+
+
+
+
+
+
+
+
 ## reids 穿透、击穿、雪崩
+
 ### 穿透
 ```
     1. 没有这笔数据
     2. key null
     3. 布隆过滤器
-```    
+```
 ### 击穿
 ```
     1. 热点key过期（没有被缓存的）
